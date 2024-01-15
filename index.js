@@ -52,43 +52,46 @@ async function login() {
   }
 }
 
-/**
- ██████╗░████████╗██╗░░██╗           
- ██╔══██╗╚══██╔══╝╚██╗██╔╝          
- ██████╔╝░░░██║░░░░╚███╔╝░          
- ██╔══██╗░░░██║░░░░██╔██╗░          
- ██║░░██║░░░██║░░░██╔╝╚██╗          
- ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
-GIT : https://github.com/RTX-GAMINGG/Bot-ghost-status-remover-by-RTX
-  DISCORD SERVER : https://discord.gg/FUEHs7RCqz
-  YOUTUBE : https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A
- * **********************************************
- *   Code by RTX GAMING
- * **********************************************
- */
+  const activities = [
+      {
+        name: 'shop @ .gg/kaerin !'
+        type: ActivityType.Streaming
+        url: 'https://www.twitch.tv/discord'
+      },
+      {
+        name: 'buy now !'
+        type: ActivityType.Streaming
+        url: 'https://www.twitch.tv/discord'
+      },
+      {
+        name: 'ticket to order !'
+        type: ActivityType.Streaming
+        url: 'https://www.twitch.tv/discord'
+      }
+
+    ]
+    
+    setInterval(() => {
+        const random = Math.floor(Math.random()*activities.length);
+        client.user.setActivity(activities[random]);
+
+    }, 5000);
+    client.user.setPresence({
+      activities: [{ name: ".gg/kaerin", type: ActivityType.Streaming, url: "https://www.twitch.tv/discord" }],
+      status: 'dnd',
+    });
 
 
-function updateStatusAndSendMessages() {
-  const currentStatus = statusMessages[currentIndex];
-  const nextStatus = statusMessages[(currentIndex + 1) % statusMessages.length];
+    const textChannel = client.channels.cache.get(channelId);
 
-  client.user.setPresence({
-    activities: [{ name: currentStatus, type: ActivityType.Custom}],
-    status: 'dnd',
-  });
+    if (textChannel instanceof TextChannel) {
 
-  
-  const textChannel = client.channels.cache.get(channelId);
+      textChannel.send(`Bot status is: ${currentStatus}`);
+    } else {
+    }
 
-  if (textChannel instanceof TextChannel) {
-   
-    textChannel.send(`Bot status is: ${currentStatus}`);
-  } else {
-
+    currentIndex = (currentIndex + 1) % statusMessages.length;
   }
-
-  currentIndex = (currentIndex + 1) % statusMessages.length;
-}
 
 client.once('ready', () => {
   console.log(`\x1b[36m%s\x1b[0m`, `|    ✅ Bot is ready as ${client.user.tag}`);
@@ -103,17 +106,3 @@ client.once('ready', () => {
 
 login();
 
-/**
- ██████╗░████████╗██╗░░██╗           
- ██╔══██╗╚══██╔══╝╚██╗██╔╝          
- ██████╔╝░░░██║░░░░╚███╔╝░          
- ██╔══██╗░░░██║░░░░██╔██╗░          
- ██║░░██║░░░██║░░░██╔╝╚██╗          
- ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
-GIT : https://github.com/RTX-GAMINGG/Bot-ghost-status-remover-by-RTX
-  DISCORD SERVER : https://discord.gg/FUEHs7RCqz
-  YOUTUBE : https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A
- * **********************************************
- *   Code by RTX GAMING
- * **********************************************
- */
